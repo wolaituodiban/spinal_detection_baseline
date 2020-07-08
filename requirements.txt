@@ -1,0 +1,8 @@
+SimpleITK>=1.2.4
+opencv-python
+numpy>=1.18.1
+tqdm>=4.46.1
+torch>=1.15.0
+torchvision>=0.6.0
+pillow>=7.1.2
+pandas
