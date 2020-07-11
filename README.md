@@ -18,6 +18,12 @@
 --models                  存放模型文件的目录  
 --predictions             存放预测结果的目录  
 --requirements.txt        项目的依赖，请自行安装      
-4.提交的baseline分数在0.3274左右  
+4.关于环境安装的建议  
+conda create -n py37torch15 python=3.7  
+conda activate py37torch15  
+conda install pytorch==1.5.0 torchvision==0.6.0 cudatoolkit=10.1 -c pytorch  
+pip install -r requirements.txt  
+5.提交的baseline分数在0.3274左右  
+
 
 第一次分享baseline，如果有哪里做的不好，还请多多包含

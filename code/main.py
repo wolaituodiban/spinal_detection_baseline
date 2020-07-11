@@ -18,9 +18,9 @@ from nn_tools import torch_utils
 if __name__ == '__main__':
     start_time = time.time()
     train_studies, train_annotation, train_counter = construct_studies(
-        'data/lumbar_train150', 'data/lumbar_train150_annotation.json', multiprocessing=True)
+        'data/lumbar_train150', 'data/lumbar_train150_annotation.json', multiprocessing=False)
     valid_studies, valid_annotation, valid_counter = construct_studies(
-        'data/train/', 'data/lumbar_train51_annotation.json', multiprocessing=True)
+        'data/lumbar_train51/', 'data/lumbar_train51_annotation.json', multiprocessing=False)
 
     # 设定模型参数
     train_images = {}
@@ -46,7 +46,7 @@ if __name__ == '__main__':
 
     step_per_batch = len(train_dataloader)
     optimizer = torch.optim.AdamW(dis_model.parameters(), lr=1e-5)
-    max_step = 20 * step_per_batch
+    max_step = 1 * step_per_batch
     fit_result = torch_utils.fit(
         dis_model,
         train_data=train_dataloader,
@@ -62,7 +62,7 @@ if __name__ == '__main__':
 
     torch.save(dis_model.cpu().state_dict(), 'models/baseline.dis_model')
     # 预测
-    testA_studies = construct_studies('data/lumbar_testA50/')
+    testA_studies = construct_studies('data/lumbar_testA50/', multiprocessing=False)
 
     result = []
     for study in testA_studies.values():
