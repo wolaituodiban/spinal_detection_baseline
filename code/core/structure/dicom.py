@@ -111,13 +111,14 @@ class DICOM:
 
         try:
             image = reader.Execute()
-            if image.GetNumberOfComponentsPerPixel() == 1:
-                image = sitk.RescaleIntensity(image, 0, 255)
-                if reader.GetMetaData('0028|0004').strip() == 'MONOCHROME1':
-                    image = sitk.InvertIntensity(image, maximum=255)
-                image = sitk.Cast(image, sitk.sitkUInt8)
-            img_x = sitk.GetArrayFromImage(image)[0]
-            self.image: Image.Image = tf.to_pil_image(img_x)
+            array = sitk.GetArrayFromImage(image)[0]
+            # rescale the range of image array and cast it to np.uint8.
+            # though SimpleITK has similar method, it may crash with python 3.7 and ubuntu 20.04
+            # and the reason is unknown right now. thus, i choose to write my own cast code.
+            array = array.astype(np.float64)
+            array = (array - array.min()) * (255 / (array.max() - array.min()))
+            array = array.astype(np.uint8)
+            self.image: Image.Image = tf.to_pil_image(array)
         except RuntimeError:
             self.image = None
 
