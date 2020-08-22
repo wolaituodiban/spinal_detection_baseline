@@ -1,4 +1,5 @@
 1.本项目是Spark“数字人体”AI挑战赛——脊柱疾病智能诊断大赛的baseline  
+我公开了我在初赛中使用的代码，比baseline精度更高，有兴趣的同学可以移步wolaituodiban/spinal_disease_detection项目    
 2.本项目依赖于nn_tools，可以在github本人（wolaituodiban）项目中中自行搜索下载  
 3.文件结构  
 --code  
